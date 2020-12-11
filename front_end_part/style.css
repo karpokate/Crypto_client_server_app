@@ -22,13 +22,6 @@ h2 {
 	text-align: center;
 }
 
-p {
-	font-size: 14px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
-}
 
 span {
 	font-size: 12px;
@@ -54,8 +47,9 @@ input {
 	background-color: #eee;
 	border: none;
 	padding: 15px 12px;
-	margin: 8px 0;
+	margin: 10px 0;
 	width: 100%;
+	font-size: 14px;
 }
 div{
     margin: 15px 0;
