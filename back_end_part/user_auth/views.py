@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from djoser.views import *
 
-# Create your views here.
+
+class UserViewSet(UserViewSet):
+    pass
+
+
+class TokenCreateView(TokenCreateView):
+    pass
+
+
+class TokenDestroyView(TokenDestroyView):
+    pass

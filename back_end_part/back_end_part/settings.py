@@ -26,7 +26,10 @@ SECRET_KEY = '4^vct!g@f)z*7=n-yoz*z2q*z@jt)s&r&a)an-#=+%w_$2sp(n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.198.1.24',
+    '127.0.0.1'
+]
 
 AUTH_USER_MODEL = 'user_auth.User'
 
