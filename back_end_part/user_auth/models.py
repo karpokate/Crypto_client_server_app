@@ -8,7 +8,7 @@ from rest_framework.authentication import TokenAuthentication
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, email, name, surname, gender, date_of_birth, password=None):
+    def create_user(self, email, name, home_address, phone_number, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -17,17 +17,17 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not name:
             raise ValueError('Users must have an name')
-        if not surname:
-            raise ValueError('Users must have an surname')
-        if not gender:
-            raise ValueError('Users must have an gender')
+        if not home_address:
+            raise ValueError('Users must have an home_address')
+        if not phone_number:
+            raise ValueError('Users must have an phone_number')
+
 
         user = self.model(
             email=self.normalize_email(email),
             name=name,
-            surname=surname,
-            gender=gender,
-            date_of_birth=date_of_birth,
+            home_address=home_address,
+            phone_number=phone_number,
         )
 
         user.set_password(password)
@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, name, surname, gender, date_of_birth, password=None):
+    def create_superuser(self, email, name, home_address, phone_number, password=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -43,10 +43,9 @@ class UserManager(BaseUserManager):
         user = self.create_user(
             email=email,
             name=name,
-            surname=surname,
-            gender=gender,
+            home_address=home_address,
+            phone_number=phone_number,
             password=password,
-            date_of_birth=date_of_birth,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -60,32 +59,26 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    date_of_birth = models.DateField(null=True)
     name = models.CharField(
         verbose_name='name',
         max_length=64,
         default='user_name'
     )
-    surname = models.TextField(
-        verbose_name='surname',
-        max_length=64,
-        default='user_surname'
+    phone_number = models.CharField(
+        verbose_name='phone_number',
+        max_length=12,
+        default='380000000000',
     )
-    GENDER_TYPES = (
-        (1, 'female'),
-        (2, 'male')
-    )
-    gender = models.IntegerField(
-        verbose_name='gender',
-        choices=GENDER_TYPES,
-        default=2
+    home_address = models.CharField(
+        verbose_name='home_address',
+        max_length=100,
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'surname', 'gender', 'date_of_birth' ]
+    REQUIRED_FIELDS = ['name', 'phone_number', 'home_address']
 
     def __str__(self):
         return self.email
